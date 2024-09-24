@@ -14,10 +14,13 @@ export class ParallaxPrincipalComponent implements OnInit{
   constructor() { }
 
   ngOnInit(): void {
+    // Register ScrollTrigger plugin
     gsap.registerPlugin(ScrollTrigger);
 
+    // Zoom and fade out for the first scene
     gsap.to(".scene-1", {
-      scale: 3,
+      scale: 2,
+      opacity: 0,  // Fade out
       scrollTrigger: {
         trigger: ".scene-1",
         start: "top top",
@@ -27,17 +30,17 @@ export class ParallaxPrincipalComponent implements OnInit{
       }
     });
 
-    gsap.to(".scene-2", {
-      scale: 2,
-      scrollTrigger: {
-        trigger: ".scene-2",
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-        pin: true,
-      }
-    });
-
+    // Zoom and fade in for the second scene
+    gsap.fromTo(".scene-2", 
+      { scale: 0.8, opacity: 0 }, 
+      { scale: 1.5, opacity: 1,  
+        scrollTrigger: {
+          trigger: ".scene-2",
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+          pin: true,
+        }
+      });
   }
-
 }
