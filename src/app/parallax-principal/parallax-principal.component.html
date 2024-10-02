@@ -1,10 +1,41 @@
+<style>
+  body::-webkit-scrollbar {
+    display: none;  /* Pour Chrome, Safari, et Opera */
+}
+
+.cross {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+  }
+
+  .cross::before,
+  .cross::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px; /* Épaisseur de la croix */
+    background-color: red; /* Couleur de la croix */
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+  }
+
+  .cross::after {
+    transform: rotate(90deg) translateY(-50%);
+  }
+
+</style>
+
+<body>
 <div class="scene-container">
-    <section class="scene-1 h-screen bg-cover bg-center" style="background-image: url('/assets/satellite-view.jpg')">
-      <!-- Vue satellite -->
+    <section class="scene-1 h-screen bg-cover bg-center relative" style="background-image: url('/assets/satellite-view.jpg')">
+    </section>
+    <section class="scene-2 h-screen bg-cover bg-center relative" style="background-image: url('/assets/normandie-view.jpg')">
     </section>
   
-    <section class="scene-2 h-screen bg-cover bg-center" style="background-image: url('/assets/forest-view.jpg')">
-      <!-- Vue forêt -->
-    </section>
+
+   
   </div>
-  
+</body>

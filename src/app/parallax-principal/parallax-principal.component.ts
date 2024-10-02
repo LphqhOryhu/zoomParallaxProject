@@ -18,29 +18,35 @@ export class ParallaxPrincipalComponent implements OnInit{
     gsap.registerPlugin(ScrollTrigger);
 
     // Zoom and fade out for the first scene
-    gsap.to(".scene-1", {
-      scale: 2,
-      opacity: 0,  // Fade out
-      scrollTrigger: {
-        trigger: ".scene-1",
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-        pin: true,
-      }
-    });
-
-    // Zoom and fade in for the second scene
-    gsap.fromTo(".scene-2", 
-      { scale: 0.8, opacity: 0 }, 
-      { scale: 1.5, opacity: 1,  
-        scrollTrigger: {
-          trigger: ".scene-2",
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-          pin: true,
-        }
-      });
+gsap.fromTo(".scene-1", 
+  { scale: 1, opacity: 1 }, 
+  { scale: 1.5, opacity: 0, 
+    transformOrigin: "top right",
+    scrollTrigger: {
+      trigger: ".scene-1",
+      start: "top top",  // Commence quand .scene-1 entre dans le viewport
+      end: "80% top",    // Se termine un peu avant que .scene-1 quitte le viewport (chevauchement avec .scene-2)
+      scrub: true,       // Synchronisé avec le défilement
+      pin: true,         // Fixe l'élément pendant le défilement
+    }
   }
+);
+
+// Zoom and fade in for the second scene
+gsap.fromTo(".scene-2", 
+  { scale: 0.5, opacity: 0.5 },  // Démarre en étant invisible et avec un zoom plus grand
+  { scale: 1, opacity: 1,      // Zoom progressif et apparition
+    scrollTrigger: {
+      trigger: ".scene-2",
+      start: "10% bottom",  // Commence avant que .scene-2 n'entre complètement dans le viewport
+      end: "bottom top",    // Se termine lorsque le bas de .scene-2 atteint le haut de la fenêtre
+      scrub: true,          // Synchronisé avec le défilement
+      pin: true,            // Fixe l'élément pendant le défilement
+    }
+  }
+);
+
+
+
+    }
 }
